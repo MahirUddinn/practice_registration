@@ -7,7 +7,12 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit()
     : super(
         AuthState(
-          user: DemoRegistrationRequestEntity(id: "", password: "", number: "", email: ""),
+          user: DemoRegistrationRequestEntity(
+            id: "",
+            password: "",
+            number: "",
+            email: "",
+          ),
           isAuthenticating: false,
         ),
       );
@@ -34,10 +39,10 @@ class AuthCubit extends Cubit<AuthState> {
 
     await Future.delayed(const Duration(seconds: 1));
 
-    print("ID: ${state.user.id}");
-    print("Password: ${state.user.password}");
-    print("Number: ${state.user.number}");
-    print("Email: ${state.user.email}");
+    print(state.user.id);
+    print(state.user.password);
+    print(state.user.email);
+    print(state.user.number);
 
     emit(state.copyWith(isAuthenticating: false));
   }

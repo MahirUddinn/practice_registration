@@ -13,22 +13,20 @@ class DemoRegistrationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: const Color(0xFFEDEDED),
       body: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
-          return Container(
-            height: double.infinity,
-            width: double.infinity,
-            color: Color(0xFFEDEDED),
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: width * 0.08,
-                  vertical: 24,
-                ),
-                child: Form(
-                  key: _form,
-                  child: SingleChildScrollView(
-                    child: _buildInputForms(context)
+          return Center(
+            child: Form(
+              key: _form,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.08,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: _buildInputForms(context),
                   ),
                 ),
               ),
@@ -38,33 +36,22 @@ class DemoRegistrationPage extends StatelessWidget {
       ),
     );
   }
-  another(){
-    return Column(children: [
-      TextFormField(),
-      SizedBox(height: 10,),
-      TextFormField(),
-      SizedBox(height: 10,),
-      ElevatedButton(onPressed: (){}, child: Text("GPPpp"))
-    ],);
-  }
 
-  Widget _buildInputForms(BuildContext context) {
-    return Column(
-      children: [
-        CustomTextField(hintText: "id"),
-        SizedBox(height: 10),
-        CustomTextField(hintText: "password"),
-        SizedBox(height: 10),
-        CustomTextField(hintText: "number"),
-        SizedBox(height: 10),
-        CustomTextField(hintText: "email"),
-        SizedBox(height: 10),
-        CustomRegisterButton(
-          onSubmit: () {
-            context.read<AuthCubit>().submit(_form);
-          },
-        ),
-      ],
-    );
+  List<Widget> _buildInputForms(BuildContext context) {
+    return [
+      const CustomTextField(hintText: "id"),
+      const SizedBox(height: 10),
+      const CustomTextField(hintText: "password"),
+      const SizedBox(height: 10),
+      const CustomTextField(hintText: "number"),
+      const SizedBox(height: 10),
+      const CustomTextField(hintText: "email"),
+      const SizedBox(height: 10),
+      CustomRegisterButton(
+        onSubmit: () {
+          context.read<AuthCubit>().submit(_form);
+        },
+      ),
+    ];
   }
 }

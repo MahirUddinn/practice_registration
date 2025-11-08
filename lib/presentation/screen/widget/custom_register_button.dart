@@ -14,15 +14,15 @@ class CustomRegisterButton extends StatelessWidget {
         return InkWell(
           onTap: onSubmit,
           child: Container(
-            padding: EdgeInsets.all(18),
+            padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              color: Color(0xFF0793EB),
+              color: const Color(0xFF0793EB),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
               child: state.isAuthenticating
-                  ? CircularProgressIndicator()
-                  : Text(
+                  ? const CircularProgressIndicator()
+                  : const Text(
                       "Register",
                       style: TextStyle(
                         color: Colors.white,
