@@ -29,7 +29,7 @@ class AuthCubit extends Cubit<AuthState> {
   void updateEmail(String value) =>
       emit(state.copyWith(user: state.user.copyWith(email: value)));
 
-  Future<void> submit(GlobalKey<FormState> form) async {
+  Future<void> submit() async {
     emit(state.copyWith(isAuthenticating: true));
     await Future.delayed(const Duration(seconds: 1));
     print(state.user.id);

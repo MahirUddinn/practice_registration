@@ -149,7 +149,7 @@ class DemoRegistrationPage extends StatelessWidget {
             final isValid = _form.currentState?.validate() ?? false;
             if (!isValid) return;
             _form.currentState?.save();
-            context.read<AuthCubit>().submit(_form);
+            context.read<AuthCubit>().submit();
           },
         ),
     ];
