@@ -10,31 +10,25 @@ class CustomRegisterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
-      builder: (context, state) {
-        return InkWell(
-          onTap: onSubmit,
-          child: Container(
-            padding: const EdgeInsets.all(18),
-            decoration: BoxDecoration(
-              color: const Color(0xFF0793EB),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Center(
-              child: state.isAuthenticating
-                  ? const CircularProgressIndicator()
-                  :Text(
-                      text,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-            ),
-          ),
-        );
-      },
+    return InkWell(
+      onTap: onSubmit,
+      child: Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: const Color(0xFF0793EB),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Center(
+          child: Text(
+                  text,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+        ),
+      ),
     );
   }
 }

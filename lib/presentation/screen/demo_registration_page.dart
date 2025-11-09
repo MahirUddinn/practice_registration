@@ -29,7 +29,10 @@ class DemoRegistrationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    final width = MediaQuery
+        .of(context)
+        .size
+        .width;
 
     return Scaffold(
       backgroundColor: const Color(0xFFEDEDED),
@@ -140,13 +143,21 @@ class DemoRegistrationPage extends StatelessWidget {
       ),
       const SizedBox(height: 20),
 
-      CustomRegisterButton(
-        text: "Register",
-        onSubmit: () {
-          final isValid = _form.currentState?.validate() ?? false;
-          if (!isValid) return;
-          _form.currentState?.save();
-          context.read<AuthCubit>().submit(_form);
+
+      BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          if(state.isAuthenticating){
+            return Center(child: CircularProgressIndicator());
+          }
+          return CustomRegisterButton(
+            text: "Register",
+            onSubmit: () {
+              final isValid = _form.currentState?.validate() ?? false;
+              if (!isValid) return;
+              _form.currentState?.save();
+              context.read<AuthCubit>().submit(_form);
+            },
+          );
         },
       ),
     ];
