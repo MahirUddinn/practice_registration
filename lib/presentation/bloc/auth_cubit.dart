@@ -36,14 +36,11 @@ class AuthCubit extends Cubit<AuthState> {
     form.currentState!.save();
 
     emit(state.copyWith(isAuthenticating: true));
-
     await Future.delayed(const Duration(seconds: 1));
-
     print(state.user.id);
     print(state.user.password);
     print(state.user.email);
     print(state.user.number);
-
     emit(state.copyWith(isAuthenticating: false));
   }
 }
