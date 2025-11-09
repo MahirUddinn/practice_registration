@@ -1,6 +1,5 @@
-import 'package:demo_registration/presentation/entity/demo_registration_request_entity.dart';
+import 'package:demo_registration/entity/demo_registration_request_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -31,7 +30,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> submit() async {
     emit(state.copyWith(isAuthenticating: true));
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 2));
     print(state.user.id);
     print(state.user.password);
     print(state.user.email);
