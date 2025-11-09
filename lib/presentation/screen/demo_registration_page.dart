@@ -29,10 +29,7 @@ class DemoRegistrationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: const Color(0xFFEDEDED),
@@ -45,7 +42,7 @@ class DemoRegistrationPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: width * 0.08),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: _buildInputForms(context),
+                  children: _buildInputForms(context, state),
                 ),
               ),
             ),
@@ -55,7 +52,7 @@ class DemoRegistrationPage extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildInputForms(BuildContext context) {
+  List<Widget> _buildInputForms(BuildContext context, AuthState state) {
     return [
       CustomTextField(
         hintText: "Enter User ID",
@@ -143,23 +140,18 @@ class DemoRegistrationPage extends StatelessWidget {
       ),
       const SizedBox(height: 20),
 
-
-      BlocBuilder<AuthCubit, AuthState>(
-        builder: (context, state) {
-          if(state.isAuthenticating){
-            return Center(child: CircularProgressIndicator());
-          }
-          return CustomRegisterButton(
-            text: "Register",
-            onSubmit: () {
-              final isValid = _form.currentState?.validate() ?? false;
-              if (!isValid) return;
-              _form.currentState?.save();
-              context.read<AuthCubit>().submit(_form);
-            },
-          );
-        },
-      ),
+      if (state.isAuthenticating)
+        Center(child: CircularProgressIndicator())
+      else
+        CustomRegisterButton(
+          text: "Register",
+          onSubmit: () {
+            final isValid = _form.currentState?.validate() ?? false;
+            if (!isValid) return;
+            _form.currentState?.save();
+            context.read<AuthCubit>().submit(_form);
+          },
+        ),
     ];
   }
 }
