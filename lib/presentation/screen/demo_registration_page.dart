@@ -9,24 +9,6 @@ class DemoRegistrationPage extends StatelessWidget {
 
   final _form = GlobalKey<FormState>();
 
-  void onSaved(BuildContext context, String? newValue, String type) {
-    if (newValue == null) return;
-    switch (type) {
-      case "id":
-        context.read<AuthCubit>().updateID(newValue);
-        break;
-      case "password":
-        context.read<AuthCubit>().updatePassword(newValue);
-        break;
-      case "number":
-        context.read<AuthCubit>().updatePhoneNumber(newValue);
-        break;
-      case "email":
-        context.read<AuthCubit>().updateEmail(newValue);
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -72,7 +54,7 @@ class DemoRegistrationPage extends StatelessWidget {
           return null;
         },
         onSaved: (newValue) {
-          onSaved(context, newValue, "id");
+          context.read<AuthCubit>().updateID(newValue!);
         },
       ),
       const SizedBox(height: 10),
@@ -91,7 +73,7 @@ class DemoRegistrationPage extends StatelessWidget {
           return null;
         },
         onSaved: (newValue) {
-          onSaved(context, newValue, "password");
+          context.read<AuthCubit>().updatePassword(newValue!);
         },
       ),
       const SizedBox(height: 10),
@@ -113,7 +95,7 @@ class DemoRegistrationPage extends StatelessWidget {
           return null;
         },
         onSaved: (newValue) {
-          onSaved(context, newValue, "number");
+          context.read<AuthCubit>().updatePhoneNumber(newValue!);
         },
       ),
       const SizedBox(height: 10),
@@ -135,7 +117,7 @@ class DemoRegistrationPage extends StatelessWidget {
           return null;
         },
         onSaved: (newValue) {
-          onSaved(context, newValue, "email");
+          context.read<AuthCubit>().updateEmail(newValue!);
         },
       ),
       const SizedBox(height: 20),
