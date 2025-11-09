@@ -141,6 +141,7 @@ class DemoRegistrationPage extends StatelessWidget {
       const SizedBox(height: 20),
 
       CustomRegisterButton(
+        text: "Register",
         onSubmit: () {
           final isValid = _form.currentState?.validate() ?? false;
           if (!isValid) return;
