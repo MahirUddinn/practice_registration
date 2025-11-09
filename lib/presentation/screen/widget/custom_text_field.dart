@@ -1,6 +1,4 @@
-import 'package:demo_registration/presentation/bloc/auth_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -25,38 +23,34 @@ class CustomTextField extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-      child: BlocBuilder<AuthCubit, AuthState>(
-        builder: (context, state) {
-          return TextFormField(
-            obscureText: isObscure,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide.none,
-              ),
-              floatingLabelBehavior: FloatingLabelBehavior.never,
-              hintText: hintText,
-              prefixIcon: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Icon(
-                  iconData,
-                  color: const Color(0xFF020202),
-                ),
-              ),
-              prefixIconConstraints: const BoxConstraints(
-                minWidth: 40,
-                minHeight: 40,
-              ),
+      child: TextFormField(
+        obscureText: isObscure,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide.none,
+          ),
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+          hintText: hintText,
+          prefixIcon: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Icon(
+              iconData,
+              color: const Color(0xFF020202),
             ),
-            textCapitalization: TextCapitalization.none,
-            autocorrect: false,
-            keyboardType: keyboardType,
-            validator: validator,
-            onSaved: onSaved,
-          );
-        },
+          ),
+          prefixIconConstraints: const BoxConstraints(
+            minWidth: 40,
+            minHeight: 40,
+          ),
+        ),
+        textCapitalization: TextCapitalization.none,
+        autocorrect: false,
+        keyboardType: keyboardType,
+        validator: validator,
+        onSaved: onSaved,
       ),
     );
   }
