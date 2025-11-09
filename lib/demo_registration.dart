@@ -10,11 +10,11 @@ class DemoRegistration extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-        title: 'Demo Registration',
-        home: BlocProvider(
-          create: (context) => AuthCubit(),
-          child: DemoRegistrationPage(),
-        )
+      title: 'Demo Registration',
+      home: MultiBlocProvider(
+        providers: [BlocProvider(create: (context) => AuthCubit())],
+        child: DemoRegistrationPage(),
+      ),
     );
   }
 }
