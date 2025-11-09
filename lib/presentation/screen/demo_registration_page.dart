@@ -9,9 +9,28 @@ class DemoRegistrationPage extends StatelessWidget {
 
   final _form = GlobalKey<FormState>();
 
+  void onSaved(BuildContext context, String? newValue, String type) {
+    if (newValue == null) return;
+    switch (type) {
+      case "id":
+        context.read<AuthCubit>().updateID(newValue);
+        break;
+      case "password":
+        context.read<AuthCubit>().updatePassword(newValue);
+        break;
+      case "number":
+        context.read<AuthCubit>().updatePhoneNumber(newValue);
+        break;
+      case "email":
+        context.read<AuthCubit>().updateEmail(newValue);
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: const Color(0xFFEDEDED),
       body: BlocBuilder<AuthCubit, AuthState>(
@@ -20,12 +39,10 @@ class DemoRegistrationPage extends StatelessWidget {
             child: Form(
               key: _form,
               child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: width * 0.08),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: _buildInputForms(context),
-                  ),
+                padding: EdgeInsets.symmetric(horizontal: width * 0.08),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: _buildInputForms(context),
                 ),
               ),
             ),
@@ -43,7 +60,7 @@ class DemoRegistrationPage extends StatelessWidget {
         isObscure: false,
         keyboardType: TextInputType.text,
         validator: (input) {
-          if (input!.isEmpty) {
+          if (input == null || input.isEmpty) {
             return "This field can't be empty";
           }
           if (input.length < 4) {
@@ -55,7 +72,7 @@ class DemoRegistrationPage extends StatelessWidget {
           return null;
         },
         onSaved: (newValue) {
-          context.read<AuthCubit>().updateID(newValue ?? "");
+          onSaved(context, newValue, "id");
         },
       ),
       const SizedBox(height: 10),
@@ -65,7 +82,7 @@ class DemoRegistrationPage extends StatelessWidget {
         isObscure: true,
         keyboardType: TextInputType.text,
         validator: (input) {
-          if (input!.isEmpty) {
+          if (input == null || input.isEmpty) {
             return "This field can't be empty";
           }
           if (input.length < 6) {
@@ -74,7 +91,7 @@ class DemoRegistrationPage extends StatelessWidget {
           return null;
         },
         onSaved: (newValue) {
-          context.read<AuthCubit>().updatePassword(newValue ?? "");
+          onSaved(context, newValue, "password");
         },
       ),
       const SizedBox(height: 10),
@@ -84,7 +101,7 @@ class DemoRegistrationPage extends StatelessWidget {
         isObscure: false,
         keyboardType: TextInputType.number,
         validator: (input) {
-          if (input!.isEmpty) {
+          if (input == null || input.isEmpty) {
             return "This field can't be empty";
           }
           if (int.tryParse(input) == null) {
@@ -96,7 +113,7 @@ class DemoRegistrationPage extends StatelessWidget {
           return null;
         },
         onSaved: (newValue) {
-          context.read<AuthCubit>().updatePhoneNumber(newValue ?? "");
+          onSaved(context, newValue, "number");
         },
       ),
       const SizedBox(height: 10),
@@ -106,24 +123,28 @@ class DemoRegistrationPage extends StatelessWidget {
         isObscure: false,
         keyboardType: TextInputType.emailAddress,
         validator: (input) {
-          if (input!.isEmpty) {
+          if (input == null || input.isEmpty) {
             return "This field can't be empty";
           }
           if (!input.contains("@") ||
               !input.contains(".") ||
               input.contains(" ") ||
-              input.indexOf("@") > input.indexOf(".")) {
+              input.indexOf("@") > input.lastIndexOf(".")) {
             return "Enter a valid email address";
           }
           return null;
         },
         onSaved: (newValue) {
-          context.read<AuthCubit>().updateEmail(newValue ?? "");
+          onSaved(context, newValue, "email");
         },
       ),
-      const SizedBox(height: 10),
+      const SizedBox(height: 20),
+
       CustomRegisterButton(
         onSubmit: () {
+          final isValid = _form.currentState?.validate() ?? false;
+          if (!isValid) return;
+          _form.currentState?.save();
           context.read<AuthCubit>().submit(_form);
         },
       ),
