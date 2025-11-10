@@ -36,10 +36,7 @@ class CustomTextField extends StatelessWidget {
           hintText: hintText,
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Icon(
-              iconData,
-              color: const Color(0xFF020202),
-            ),
+            child: Icon(iconData, color: const Color(0xFF020202)),
           ),
           prefixIconConstraints: const BoxConstraints(
             minWidth: 40,

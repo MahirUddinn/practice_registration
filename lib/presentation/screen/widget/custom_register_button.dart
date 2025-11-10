@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomRegisterButton extends StatelessWidget {
-  const CustomRegisterButton({super.key, required this.onSubmit, required this.text,});
+  const CustomRegisterButton({
+    super.key,
+    required this.onSubmit,
+    required this.text,
+  });
 
   final VoidCallback onSubmit;
   final String text;
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +23,13 @@ class CustomRegisterButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-                  text,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
+            text,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
         ),
       ),
     );
